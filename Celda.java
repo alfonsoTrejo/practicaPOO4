@@ -4,19 +4,23 @@
  */
 package com.mycompany.practica4;
 
+import java.awt.Color;
+
 /**
  *
  * @author trejo
  */
 public class Celda {
         private char valor;
-        private String color;
+        private Color color;
+        private int posicion; 
 
     public Celda() {
         this.valor = ' ';
-        this.color = "gris";
+        this.color = new Color(136,136,136);
        // this.color = "#888888";
     }
+    
     
     public char getValor() {
         return valor;
@@ -26,11 +30,21 @@ public class Celda {
         this.valor = valor;
     }
 
-    public String getColor() {
+    
+    public Color getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(Color color) {
         this.color = color;
+    }
+
+
+    public int getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(int posicion) {
+        this.posicion = posicion;
     }
 }

@@ -3,13 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.practica4;
+import java.awt.Color;
 import java.util.ArrayList;
-
+import java.util.HashMap;
 /**
  *
  * @author molguin
  */
 public class JuegoWordle {
+    private HashMap<String,Color> tecladoGrafico; 
+    private WordleGrafico grafico;
     private ITablero tablero;
     private ITeclado teclado;
     private ArrayList<Celda> celda;
@@ -17,8 +20,9 @@ public class JuegoWordle {
     private int intentos =0, maximoIntento =5;
     private String palabra;
     private String intento ;
-    public JuegoWordle(ITablero tablero, ITeclado teclado) {
-        this.tablero = tablero;
+    public JuegoWordle( ITeclado teclado,WordleGrafico grafico) {
+        tecladoGrafico = new HashMap<String,Color>();
+        this.grafico = grafico;
         this.teclado = teclado;
         celda = new ArrayList<Celda>();
         for (int i = 0; i <5; i++) {
@@ -40,13 +44,25 @@ public class JuegoWordle {
     public void jugar() {
         
         palabra = getPalabra();
-        
+        String letras = "qwertyuiopasdfghjklzxcvbnm";
+        for (int i = 0; i < letras.length(); i++) {
+            tecladoGrafico.put(letras.charAt(i)+"", new Color(136,136,136));
+        }
+ 
+        grafico.dibujarLinea(intentos, celda);
         do {
+            
             verificarPalabra();
-            intentos += 1;
+
+           
             System.out.println("Intentos:"+ intentos);
-            //if(intento.equals(palabra)) break;
-            if(algortimo()) break;
+            boolean sonIguales =algortimo();
+            grafico.dibujarLinea(intentos, celda);
+            grafico.dibujarTeclado(tecladoGrafico,celda); 
+               intentos += 1;
+            grafico.dibujarTeclado(tecladoGrafico,celda);             
+            if(sonIguales) break;
+            
         }while(!(intentos>= maximoIntento));    // POR SI LOS 5 INTENTOS ACABARON
     }
     
@@ -60,15 +76,15 @@ public class JuegoWordle {
             for (int j = 0; j < palabra.length(); j++) {  //palabra a descubrir
                 if (intento.charAt(i) == palabra.charAt(j)){
                     if (i == j) {
-                       celda.get(i).setColor("verde");                         
-                       //celda.get(i).setColor("#80A867"); 
+                       celda.get(i).setColor(new Color(128,168,103 ));
+                       break;
                     }else{
-                       celda.get(i).setColor("amarillo");                         
-                       //celda.get(i).setColor("#FDEC6F"); 
+                       celda.get(i).setColor(new Color(253,236,111 ));                         
+                     break;
                     }
-                    break;
                 }    
             }
+            celda.get(i).setPosicion(i);
             celda.get(i).setValor(intento.charAt(i));
         }
             mostrarColores();
@@ -97,7 +113,6 @@ public class JuegoWordle {
         for (int i = 0; i < celda.size(); i++) {
             System.out.print(celda.get(i).getColor());
             System.out.print(",");  
-            celda.get(i).setColor("gris");
         }
             System.out.println("");
     }
