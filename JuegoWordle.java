@@ -4,6 +4,7 @@
  */
 package com.mycompany.practica4;
 import java.awt.Color;
+import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.HashMap;
 /**
@@ -11,6 +12,7 @@ import java.util.HashMap;
  * @author molguin
  */
 public class JuegoWordle {
+    static public String palabra;
     private HashMap<String,Color> tecladoGrafico; 
     private WordleGrafico grafico;
     private ITablero tablero;
@@ -18,7 +20,7 @@ public class JuegoWordle {
     private ArrayList<Celda> celda;
     private ArrayList<String> palabras;
     private int intentos =0, maximoIntento =5;
-    private String palabra;
+    public static int renglon=0;
     private String intento ;
     public JuegoWordle( ITeclado teclado,WordleGrafico grafico) {
         tecladoGrafico = new HashMap<String,Color>();
@@ -48,22 +50,24 @@ public class JuegoWordle {
         for (int i = 0; i < letras.length(); i++) {
             tecladoGrafico.put(letras.charAt(i)+"", new Color(136,136,136));
         }
- 
-        grafico.dibujarLinea(intentos, celda);
+            
+        grafico.dibujarLinea( celda);
         do {
             
             verificarPalabra();
-
-           
             System.out.println("Intentos:"+ intentos);
             boolean sonIguales =algortimo();
-            grafico.dibujarLinea(intentos, celda);
+            grafico.dibujarLinea( celda);
+            renglon++;
             grafico.dibujarTeclado(tecladoGrafico,celda); 
-               intentos += 1;
-            grafico.dibujarTeclado(tecladoGrafico,celda);             
-            if(sonIguales) break;
+            intentos += 1;
+            if(sonIguales) {
+                System.out.println("Ganaste");
+                break;
+            }
             
         }while(!(intentos>= maximoIntento));    // POR SI LOS 5 INTENTOS ACABARON
+        
     }
     
     public String getPalabra(){      

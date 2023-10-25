@@ -7,7 +7,6 @@ package com.mycompany.practica4;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.*;
-
 /**
  * Class Canvas - a class to allow for simple graphical 
  * drawing on a canvas.
@@ -20,6 +19,7 @@ import java.awt.geom.*;
 
 public class Canvas
 {
+    
     private JFrame frame;
     private CanvasPane canvas;
     private Graphics2D graphic;
@@ -34,6 +34,7 @@ public class Canvas
     public Canvas(String title)
     {
         this(title, 1050, 700, Color.white);
+        canvas.addMouseListener(new MiMouseAdapter(this));
     }
 
     /**
@@ -44,7 +45,8 @@ public class Canvas
      */
     public Canvas(String title, int width, int height)
     {
-        this(title, width, height, Color.white);
+        this(title, width, height, Color.white);      
+        canvas.addMouseListener(new MiMouseAdapter(this));
     }
 
     /**
@@ -54,8 +56,7 @@ public class Canvas
      * @param height  the desired height for the canvas
      * @param bgClour  the desired background color of the canvas
      */
-    public Canvas(String title, int width, int height, Color bgColor)
-    {
+    public Canvas(String title, int width, int height, Color bgColor){
         frame = new JFrame();
         canvas = new CanvasPane();
         frame.setContentPane(canvas);
@@ -64,6 +65,7 @@ public class Canvas
         backgroundColor = bgColor;
         frame.pack();
         setVisible(true);
+        canvas.addMouseListener(new MiMouseAdapter(this));
     }
 
     /**

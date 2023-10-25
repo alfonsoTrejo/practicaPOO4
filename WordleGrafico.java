@@ -24,20 +24,20 @@ public class WordleGrafico {
         canvas.setFont(fontTitulo);
         canvas.drawString("WORDLE", 100, 80);
     }
-    public void dibujarLinea(int renglon, ArrayList<Celda> celdas){
+    public void dibujarLinea( ArrayList<Celda> celdas){
         int posXRelativa=90;
         int posYRelativa=90;
         for (int i = 0; i < 5; i++) {
             canvas.setFont(fontNormal);
             canvas.setForegroundColor(Color.BLACK);
-            canvas.fillRectangle((posXRelativa*i)+30,(posYRelativa*renglon)+130,80,80); 
+            canvas.fillRectangle((posXRelativa*i)+30,(posYRelativa*JuegoWordle.renglon)+130,80,80); 
         
             canvas.setForegroundColor(celdas.get(i).getColor());
-            canvas.fillRectangle(((posXRelativa)*i)+32, ((posYRelativa)*renglon)+132,76,76);  
+            canvas.fillRectangle(((posXRelativa)*i)+32, ((posYRelativa)*JuegoWordle.renglon)+132,76,76);  
             
             canvas.setFont(fontTitulo);
             canvas.setForegroundColor(Color.BLACK);
-            canvas.drawString(celdas.get(i).getValor()+"",((posXRelativa)*i)+52,((posYRelativa)*renglon)+192);
+            canvas.drawString(celdas.get(i).getValor()+"",((posXRelativa)*i)+52,((posYRelativa)*JuegoWordle.renglon)+192);
             
         }      
     }
@@ -68,43 +68,18 @@ public class WordleGrafico {
                 indicereal=i;
                 break;
             }
-            if(renglon == 0){
+         
                 canvas.setFont(fontNormal);
                 canvas.setForegroundColor(Color.BLACK);
-                canvas.fillRectangle((posXRelativa*(i))+530,(posYRelativa*renglon)+130,40,40); 
+                canvas.fillRectangle((posXRelativa*(i-(10*renglon)))+530,(posYRelativa*renglon)+130,40,40); 
 
                 canvas.setForegroundColor(teclado.get(letras.charAt(i)+""));
-                canvas.fillRectangle(((posXRelativa)*(i))+532, ((posYRelativa)*renglon)+132,36,36);  
+                canvas.fillRectangle(((posXRelativa)*(i-(10*renglon)))+532, ((posYRelativa)*renglon)+132,36,36);  
 
                 canvas.setFont(fontNormal);
                 canvas.setForegroundColor(Color.BLACK);
-                canvas.drawString(letras.charAt((i))+"",((posXRelativa)*i)+542,((posYRelativa)*renglon)+158);
+                canvas.drawString(letras.charAt(i)+"",((posXRelativa)*(i-(10*renglon)))+542,((posYRelativa)*renglon)+158);
             
-            }
-            else if(renglon ==1){
-                canvas.setFont(fontNormal);
-                canvas.setForegroundColor(Color.BLACK);
-                canvas.fillRectangle((posXRelativa*(i-10))+530,(posYRelativa*renglon)+130,40,40); 
-
-                canvas.setForegroundColor(teclado.get(letras.charAt(i)+""));
-                canvas.fillRectangle(((posXRelativa)*(i-10))+532, ((posYRelativa)*renglon)+132,36,36);  
-
-                canvas.setFont(fontNormal);
-                canvas.setForegroundColor(Color.BLACK);
-                canvas.drawString(letras.charAt((i))+"",((posXRelativa)*(i-10))+542,((posYRelativa)*renglon)+158);
-            
-            }else if (renglon ==2){
-                canvas.setFont(fontNormal);
-                canvas.setForegroundColor(Color.BLACK);
-                canvas.fillRectangle((posXRelativa*(i-20))+530,(posYRelativa*renglon)+130,40,40); 
-
-                canvas.setForegroundColor(teclado.get(letras.charAt(i)+""));
-                canvas.fillRectangle(((posXRelativa)*(i-20))+532, ((posYRelativa)*renglon)+132,36,36);  
-
-                canvas.setFont(fontNormal);
-                canvas.setForegroundColor(Color.BLACK);
-                canvas.drawString(letras.charAt(i)+"",((posXRelativa)*(i-20))+542,((posYRelativa)*renglon)+158);
-            }
             }
         }
         for (int i = 0; i < celdas.size(); i++) {

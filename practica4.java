@@ -16,9 +16,6 @@ public class practica4 {
         WordleGrafico grafico = new WordleGrafico(canvas);
         JuegoWordle juego = new JuegoWordle( teclado,grafico);
         
-        juego.jugar();
-       // DrawDemo demo = new DrawDemo();        
-
-       
+        juego.jugar();    
     } 
 }
